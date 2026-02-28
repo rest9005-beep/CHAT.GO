@@ -1,0 +1,34 @@
+<div class="grid two" style="margin-top:16px">
+  <div class="card">
+    <div class="h1">CHAT.GO</div>
+    <p class="p">Общий чат в реальном времени — без лишнего. Регистрация по <b>username</b> (нельзя сменить) + пароль. Профиль (ава/шапка). Безопасность: смена пароля + 2FA (6 цифр).</p>
+    <div class="row">
+      <% if (!user) { %>
+        <a class="btn primary" href="/register">Создать аккаунт</a>
+        <a class="btn" href="/login">Войти</a>
+      <% } else { %>
+        <a class="btn primary" href="/chat">Открыть чат</a>
+        <a class="btn" href="/settings">Настроить профиль</a>
+      <% } %>
+      <span class="badge">realtime • Socket.IO</span>
+      <span class="badge">secure • bcrypt • 2FA</span>
+    </div>
+    <div class="hr"></div>
+    <div class="row">
+      <span class="badge">Подсказка: отправка <span class="kbd">Ctrl</span> + <span class="kbd">Enter</span></span>
+    </div>
+  </div>
+
+  <div class="card profileCard">
+    <div class="banner"></div>
+    <div class="profileBody">
+      <p class="p" style="margin-bottom:0">Чистый UI. Ничего лишнего.</p>
+      <div class="hr"></div>
+      <div class="grid" style="gap:10px">
+        <div class="badge">Белый фон</div>
+        <div class="badge">Синий акцент</div>
+        <div class="badge">Минимум настроек</div>
+      </div>
+    </div>
+  </div>
+</div>

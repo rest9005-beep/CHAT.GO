@@ -1,0 +1,50 @@
+<div class="grid two" style="margin-top:16px">
+  <div class="card">
+    <div class="h1">Безопасность</div>
+    <p class="p">Смена пароля и 2‑этапная аутентификация (6 цифр).</p>
+    <div class="hr"></div>
+
+    <div style="font-weight:900;font-size:16px;margin-bottom:6px">Сменить пароль</div>
+    <form method="post" action="/security/password">
+      <label class="label">Текущий пароль</label>
+      <input class="input" type="password" name="currentPassword" required />
+      <label class="label">Новый пароль</label>
+      <input class="input" type="password" name="newPassword" minlength="8" required />
+      <div class="row" style="margin-top:12px"><button class="btn primary" type="submit">Обновить пароль</button></div>
+    </form>
+  </div>
+
+  <div class="card">
+    <div class="h1">2FA · 6 цифр</div>
+    <p class="p">Подключи приложение‑аутентификатор (Google Authenticator / Authy). Это TOTP.</p>
+
+    <% if (!user.twofa_enabled) { %>
+      <div class="hr"></div>
+      <div style="font-weight:900;font-size:16px;margin-bottom:6px">Включить 2FA</div>
+      <p class="p">1) Отсканируй QR  2) Введи код для подтверждения.</p>
+
+      <div class="card" style="padding:14px;background:rgba(255,255,255,.65);border-radius:16px">
+        <img src="<%= qrDataUrl %>" alt="2FA QR" style="width:180px;height:180px;border-radius:16px;border:1px solid var(--line)" />
+        <div class="small" style="margin-top:10px">Если не сканируется — введи секрет вручную:</div>
+        <div class="badge" style="user-select:all"><%= secret %></div>
+      </div>
+
+      <form method="post" action="/security/2fa/enable" style="margin-top:12px">
+        <input type="hidden" name="secret" value="<%= secret %>" />
+        <label class="label">Код (6 цифр)</label>
+        <input class="input" name="token" inputmode="numeric" pattern="\d{6}" maxlength="6" placeholder="123456" required />
+        <div class="row" style="margin-top:12px"><button class="btn primary" type="submit">Включить 2FA</button></div>
+      </form>
+    <% } else { %>
+      <div class="badge">2FA включена</div>
+      <div class="hr"></div>
+      <div style="font-weight:900;font-size:16px;margin-bottom:6px">Отключить 2FA</div>
+      <p class="p">Для отключения введи текущий 6‑значный код.</p>
+      <form method="post" action="/security/2fa/disable">
+        <label class="label">Код (6 цифр)</label>
+        <input class="input" name="token" inputmode="numeric" pattern="\d{6}" maxlength="6" placeholder="123456" required />
+        <div class="row" style="margin-top:12px"><button class="btn danger" type="submit">Отключить 2FA</button></div>
+      </form>
+    <% } %>
+  </div>
+</div>

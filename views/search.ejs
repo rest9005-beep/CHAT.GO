@@ -1,0 +1,47 @@
+<div class="card" style="margin-top:16px">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <div>
+      <div class="h1">Поиск пользователей</div>
+      <p class="p">Найди человека по username и начни переписку.</p>
+    </div>
+    <a class="btn" href="/settings">Профиль</a>
+  </div>
+
+  <div class="hr"></div>
+
+  <div class="searchBox">
+    <input id="q" class="input" placeholder="например: fox" style="max-width:520px" />
+    <button id="find" class="btn primary" type="button">Найти</button>
+  </div>
+  <div id="results" class="searchResults" style="margin-top:14px"></div>
+</div>
+
+<script>
+(() => {
+  const q = document.getElementById("q");
+  const btn = document.getElementById("find");
+  const res = document.getElementById("results");
+  const esc = (s)=>String(s??"").replace(/[&<>"']/g,(c)=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+  async function run(){
+    const query = q.value.trim();
+    res.innerHTML = "";
+    if (!query) return;
+    const r = await fetch(`/api/users/search?q=${encodeURIComponent(query)}`);
+    const data = await r.json();
+    if (!data.users.length){ res.innerHTML = `<div class="small">Ничего не найдено</div>`; return; }
+    res.innerHTML = data.users.map(u => `
+      <a class="userItem" href="/dm/${encodeURIComponent(u.username)}">
+        <div class="ava"><img src="${esc(u.avatar_path || "/default-avatar.svg")}" alt="ava"></div>
+        <div>
+          <div class="u">${esc(u.username)}</div>
+          <div class="d">${esc(u.description || "")}</div>
+        </div>
+        <span class="pill">Написать</span>
+      </a>
+    `).join("");
+  }
+  btn.addEventListener("click", run);
+  q.addEventListener("keydown", (e)=>{ if(e.key==="Enter") run(); });
+  q.focus();
+})();
+</script>

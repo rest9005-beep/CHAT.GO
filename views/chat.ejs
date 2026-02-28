@@ -1,0 +1,55 @@
+<div class="chatWrap" style="margin-top:16px">
+  <div class="card profileCard">
+    <div class="banner">
+      <% if (user.banner_path) { %><img src="<%= user.banner_path %>" alt="banner" /><% } %>
+      <div class="avatar"><img src="<%= user.avatar_path || '/default-avatar.svg' %>" alt="avatar" /></div>
+    </div>
+    <div class="profileBody">
+      <p class="profileName"><%= user.username %></p>
+      <p class="small"><%= (user.description || '').length ? user.description : 'Без описания' %></p>
+
+      <div class="hr"></div>
+      <div class="row">
+        <span id="status" class="badge">connecting…</span>
+        <% if (user.twofa_enabled) { %><span class="badge">2FA: включена</span><% } else { %><span class="badge">2FA: выкл</span><% } %>
+      </div>
+
+      <div class="hr"></div>
+      <p class="p" style="margin:0">Подсказка: клик по аве/нику в чате открывает ЛС.</p>
+
+      <div class="hr"></div>
+      <div class="row">
+        <a class="btn" href="/settings">Профиль</a>
+        <a class="btn" href="/security">Безопасность</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card chatCard">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px">
+      <div>
+        <div style="font-weight:900;font-size:18px">Общий чат</div>
+        <div class="small">Реалтайм · цензура включена · поддержка вложений</div>
+      </div>
+    </div>
+
+    <div id="messages" class="messages" aria-live="polite"></div>
+
+    <form id="composer" class="composer">
+      <textarea id="text" placeholder="Напиши сообщение…" maxlength="1200"></textarea>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="btn primary" type="submit">Отправить</button>
+        <button id="sendFileBtn" class="btn" type="button">Файл/Фото</button>
+        <button id="recBtn" class="btn" type="button">Голосовое</button>
+        <input id="file" type="file" style="display:none" />
+      </div>
+    </form>
+
+    <div class="small" style="margin-top:10px">Подсказка: <span class="kbd">Ctrl</span> + <span class="kbd">Enter</span> — отправить</div>
+    <div id="typing" class="small" style="margin-top:6px"></div>
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>window.__ME__ = <%- JSON.stringify({ id: user.id, username: user.username }) %>;</script>
+<script src="/chat.js"></script>

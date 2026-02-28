@@ -1,0 +1,47 @@
+<div class="chatWrap" style="margin-top:16px">
+  <div class="card profileCard">
+    <div class="banner">
+      <% if (peer.banner_path) { %><img src="<%= peer.banner_path %>" alt="banner" /><% } %>
+      <div class="avatar"><img src="<%= peer.avatar_path || '/default-avatar.svg' %>" alt="avatar" /></div>
+    </div>
+    <div class="profileBody">
+      <p class="profileName"><%= peer.username %></p>
+      <p class="small"><%= (peer.description || '').length ? peer.description : 'Без описания' %></p>
+      <div class="hr"></div>
+      <div class="row">
+        <span id="status" class="badge">connecting…</span>
+        <a class="btn" href="/chat">В общий чат</a>
+      </div>
+      <div class="hr"></div>
+      <p class="p" style="margin:0">Личные сообщения · реалтайм · цензура включена</p>
+    </div>
+  </div>
+
+  <div class="card chatCard">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px">
+      <div>
+        <div style="font-weight:900;font-size:18px">ЛС с <%= peer.username %></div>
+        <div class="small">Можно отправлять фото/файлы/голосовые</div>
+      </div>
+      <a class="btn" href="/settings">Профиль</a>
+    </div>
+
+    <div id="messages" class="messages" aria-live="polite"></div>
+
+    <form id="composer" class="composer">
+      <textarea id="text" placeholder="Напиши сообщение…" maxlength="1200"></textarea>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="btn primary" type="submit">Отправить</button>
+        <button id="sendFileBtn" class="btn" type="button">Файл/Фото</button>
+        <button id="recBtn" class="btn" type="button">Голосовое</button>
+        <input id="file" type="file" style="display:none" />
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  window.__THREAD_ID__ = <%- JSON.stringify(String(threadId)) %>;
+</script>
+<script src="/dm.js"></script>

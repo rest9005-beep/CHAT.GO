@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="180" viewBox="0 0 520 180" role="img" aria-label="CHAT.GO logo">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0B5FFF"/><stop offset="1" stop-color="#2EA7FF"/>
+    </linearGradient>
+    <filter id="s" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#0B5FFF" flood-opacity=".18"/>
+    </filter>
+  </defs>
+  <rect x="20" y="26" rx="28" ry="28" width="150" height="128" fill="url(#g)" filter="url(#s)"/>
+  <path d="M66 62h78a16 16 0 0 1 16 16v28a16 16 0 0 1-16 16H98l-20 18v-18H66a16 16 0 0 1-16-16V78a16 16 0 0 1 16-16z" fill="#fff" opacity=".98"/>
+  <circle cx="86" cy="92" r="6" fill="#0B5FFF"/><circle cx="110" cy="92" r="6" fill="#0B5FFF"/><circle cx="134" cy="92" r="6" fill="#0B5FFF"/>
+  <text x="190" y="102" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="56" font-weight="800" fill="#0B5FFF">CHAT</text>
+  <text x="340" y="102" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="56" font-weight="800" fill="#0B5FFF">.GO</text>
+  <text x="190" y="136" font-family="ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="18" font-weight="600" fill="#4B6B8A">clean • realtime • secure</text>
+</svg>

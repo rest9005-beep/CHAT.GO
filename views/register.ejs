@@ -1,0 +1,15 @@
+<div class="card" style="max-width:520px;margin:16px auto 0">
+  <div class="h1">Регистрация</div>
+  <p class="p">Username нельзя будет сменить. Используй аккуратно 🙂</p>
+  <form method="post" action="/register">
+    <label class="label">Username</label>
+    <input class="input" name="username" placeholder="например: foxnoble" minlength="3" maxlength="20" required />
+    <div class="small">Разрешено: латиница, цифры, _ и .</div>
+    <label class="label">Пароль</label>
+    <input class="input" type="password" name="password" minlength="8" required />
+    <div class="row" style="margin-top:14px">
+      <button class="btn primary" type="submit">Создать аккаунт</button>
+      <a class="btn" href="/login">Уже есть аккаунт</a>
+    </div>
+  </form>
+</div>

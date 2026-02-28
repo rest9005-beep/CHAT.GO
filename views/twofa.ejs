@@ -1,0 +1,12 @@
+<div class="card" style="max-width:520px;margin:16px auto 0">
+  <div class="h1">2FA</div>
+  <p class="p">Введите 6‑значный код из приложения‑аутентификатора.</p>
+  <form method="post" action="/2fa">
+    <label class="label">Код (6 цифр)</label>
+    <input class="input" name="token" inputmode="numeric" pattern="\d{6}" maxlength="6" placeholder="123456" required />
+    <div class="row" style="margin-top:14px">
+      <button class="btn primary" type="submit">Подтвердить</button>
+      <a class="btn" href="/login">Назад</a>
+    </div>
+  </form>
+</div>

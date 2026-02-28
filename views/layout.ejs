@@ -1,0 +1,36 @@
+<!doctype html><html lang="ru"><head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title><%= title %> · CHAT.GO</title>
+<link rel="icon" href="/logo.svg" />
+<link rel="stylesheet" href="/app.css" />
+</head><body><div class="container">
+  <div class="nav">
+    <div class="brand">
+      <a href="/" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;">
+        <img src="/logo.svg" alt="CHAT.GO" />
+      </a>
+    </div>
+    <div class="links">
+      <% if (user) { %>
+        <a class="btn" href="/chat">Чат</a>
+        <a class="btn" href="/settings">Профиль</a>
+        <a class="btn" href="/security">Безопасность</a>
+        <form action="/logout" method="post" style="margin:0">
+          <button class="btn danger" type="submit">Выйти</button>
+        </form>
+      <% } else { %>
+        <a class="btn" href="/login">Вход</a>
+        <a class="btn primary" href="/register">Регистрация</a>
+      <% } %>
+    </div>
+  </div>
+
+  <% if (flash && flash.message) { %>
+    <div class="flash <%= flash.type %>"><%= flash.message %></div>
+  <% } %>
+
+  <%- body %>
+
+  <div class="footer">© <%= new Date().getFullYear() %> CHAT.GO · minimal white/blue UI</div>
+</div></body></html>

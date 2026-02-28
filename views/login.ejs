@@ -1,0 +1,14 @@
+<div class="card" style="max-width:520px;margin:16px auto 0">
+  <div class="h1">Вход</div>
+  <p class="p">Если включена 2FA — после пароля попросим 6‑значный код.</p>
+  <form method="post" action="/login">
+    <label class="label">Username</label>
+    <input class="input" name="username" required />
+    <label class="label">Пароль</label>
+    <input class="input" type="password" name="password" required />
+    <div class="row" style="margin-top:14px">
+      <button class="btn primary" type="submit">Войти</button>
+      <a class="btn" href="/register">Регистрация</a>
+    </div>
+  </form>
+</div>

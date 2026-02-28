@@ -1,0 +1,52 @@
+<div class="grid two" style="margin-top:16px">
+  <div class="card profileCard">
+    <div class="banner">
+      <% if (user.banner_path) { %><img src="<%= user.banner_path %>" alt="banner" /><% } %>
+      <div class="avatar"><img src="<%= user.avatar_path || '/default-avatar.svg' %>" alt="avatar" /></div>
+    </div>
+    <div class="profileBody">
+      <p class="profileName"><%= user.username %></p>
+      <p class="small">Username нельзя сменить</p>
+      <div class="hr"></div>
+      <div class="row"><span class="badge">Ава</span><span class="badge">Шапка</span><span class="badge">Белый/синий UI</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="h1">Профиль</div>
+    <p class="p">Username нельзя сменить. Можно добавить описание — оно будет видно в ЛС и в поиске.</p>
+    <p class="p">Загрузи аватар и/или шапку. Форматы: JPG/PNG/WebP. Макс 5MB.</p>
+
+    <form method="post" action="/settings/description">
+  <label class="label">Описание профиля (до 280 символов)</label>
+  <textarea class="input" name="description" style="min-height:110px;resize:vertical"><%= user.description || "" %></textarea>
+  <div class="row" style="margin-top:12px">
+    <button class="btn primary" type="submit">Сохранить описание</button>
+  </div>
+  <div class="small">Текст проходит цензуру.</div>
+</form>
+
+<div class="hr"></div>
+
+<form method="post" action="/settings/avatar" enctype="multipart/form-data">
+
+      <label class="label">Аватар</label>
+      <input class="input" type="file" name="avatar" accept="image/*" required />
+      <div class="row" style="margin-top:12px">
+        <button class="btn primary" type="submit">Загрузить аву</button>
+        <% if (user.avatar_path) { %><a class="btn" href="/settings/avatar/remove">Убрать</a><% } %>
+      </div>
+    </form>
+
+    <div class="hr"></div>
+
+    <form method="post" action="/settings/banner" enctype="multipart/form-data">
+      <label class="label">Шапка</label>
+      <input class="input" type="file" name="banner" accept="image/*" required />
+      <div class="row" style="margin-top:12px">
+        <button class="btn primary" type="submit">Загрузить шапку</button>
+        <% if (user.banner_path) { %><a class="btn" href="/settings/banner/remove">Убрать</a><% } %>
+      </div>
+    </form>
+  </div>
+</div>
